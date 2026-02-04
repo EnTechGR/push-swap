@@ -205,37 +205,37 @@ func TestFindMaxPosition(t *testing.T) {
 	}
 }
 
-func TestMoveToTop(t *testing.T) {
+func TestMoveToTopOptimized(t *testing.T) {
 	solver := NewSolver([]int{1, 2, 3, 4, 5})
 	
 	// Test moving element at position 2 to top
-	solver.moveToTop(solver.stackA, 2, true)
+	solver.moveToTopOptimized(solver.stackA, 2, true)
 	
 	top, _ := solver.stackA.Top()
 	if top != 3 {
-		t.Errorf("Expected top element to be 3 after moveToTop, got %d", top)
+		t.Errorf("Expected top element to be 3 after moveToTopOptimized, got %d", top)
 	}
 	
 	// Test with position 0 (should do nothing)
 	solver = NewSolver([]int{1, 2, 3, 4, 5})
 	originalTop, _ := solver.stackA.Top()
-	solver.moveToTop(solver.stackA, 0, true)
+	solver.moveToTopOptimized(solver.stackA, 0, true)
 	newTop, _ := solver.stackA.Top()
 	
 	if originalTop != newTop {
-		t.Error("moveToTop with position 0 should not change the stack")
+		t.Error("moveToTopOptimized with position 0 should not change the stack")
 	}
 }
 
-func TestMoveToTopWithReverseRotate(t *testing.T) {
+func TestMoveToTopOptimizedWithReverseRotate(t *testing.T) {
 	solver := NewSolver([]int{1, 2, 3, 4, 5})
 	
 	// Test moving element at position 4 (last) to top - should use reverse rotate
-	solver.moveToTop(solver.stackA, 4, true)
+	solver.moveToTopOptimized(solver.stackA, 4, true)
 	
 	top, _ := solver.stackA.Top()
 	if top != 5 {
-		t.Errorf("Expected top element to be 5 after moveToTop, got %d", top)
+		t.Errorf("Expected top element to be 5 after moveToTopOptimized, got %d", top)
 	}
 }
 
@@ -362,7 +362,8 @@ func TestSpecificCase(t *testing.T) {
 	if !result {
 		t.Errorf("Solution for %v should result in sorted stack", input)
 	}
-	
+}
+
 func BenchmarkSolveLarge(b *testing.B) {
 	input := make([]int, 100)
 	for i := 0; i < 100; i++ {
