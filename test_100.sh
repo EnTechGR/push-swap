@@ -7,7 +7,7 @@ generate_random_numbers() {
     
     while [ ${#numbers[@]} -lt $count ]; do
         # Generate random number between -5000 and 5000
-        num=$((RANDOM % 10001))
+        num=$((RANDOM % 10001 - 5000))
         
         # Check if number already exists
         if [[ ! " ${numbers[@]} " =~ " ${num} " ]]; then
